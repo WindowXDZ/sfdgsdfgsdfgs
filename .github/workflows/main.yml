@@ -1,22 +1,24 @@
-name: Windows Cloud PC - Anydesk
+name: GetScreen Windows 10 
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Start Building...
     runs-on: windows-latest
-    timeout-minutes: 10
-    
+
     steps:
-      - name: Downloading & Installing Essentials
+      - name: Downloading & Setting Up
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/7eiczvgil84czu55dxep3/Downloads.bat?rlkey=wzdc1wxjsph2b7r0atplmdz3p&dl=1" -OutFile "Downloads.bat"
+         echo "EMAIL_SECRET=DarkzVV@proton.me" > secrets.txt
+         Invoke-WebRequest -Uri "https://gitlab.com/chamod12/getscrn-win10-github-rdp/-/raw/main/down.bat" -OutFile "down.bat"
+         cmd /c down.bat
+                   Invoke-WebRequest -Uri "https://gitlab.com/chamod12/anydesk-windows-rdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
       - name: Log In To AnyDesk
         run: cmd /c start.bat
 
+
       - name: Time Counter
-        run: Start-Sleep -Seconds 14400
+        run: cmd /c loop.bat
